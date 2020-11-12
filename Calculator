@@ -1,0 +1,63 @@
+package studywithbrother.firsttask;
+
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        boolean continueCircle=true;
+        do {
+            try {
+                System.out.println("Please enter number");
+                int firstNumb=scanner.nextInt();
+                System.out.println("Please enter number");
+                int secondNumb=scanner.nextInt();
+                System.out.println("Value of divide: " + divide(firstNumb, secondNumb));
+                continueCircle=false;
+                System.out.println("Please enter number");
+                int thirdNumb=scanner.nextInt();
+                System.out.println("Please enter number");
+                int fourthNumb=scanner.nextInt();
+                System.out.println("Value of multiplication: " + multiplication(thirdNumb, fourthNumb));
+                continueCircle=false;
+                System.out.println("Please enter number");
+                int fifthNumb=scanner.nextInt();
+                System.out.println("Please enter number");
+                int sixNumb=scanner.nextInt();
+                System.out.println("Value of addition: " + addition(fifthNumb, sixNumb));
+                continueCircle=false;
+                System.out.println("Please enter number");
+                int memory=addition(fifthNumb, sixNumb);
+                System.out.println(memory);
+                System.out.println("Please enter number");
+                int eighthNumb=scanner.nextInt();
+                System.out.println("Value of deduction: " + deduction(memory, eighthNumb));
+                continueCircle=false;
+            } catch (ArithmeticException | InputMismatchException e) {
+                System.out.println("Exception: " + e);
+                scanner.nextLine();
+                System.out.println("Only integer non-zero values can be used here");
+            }
+        } while (continueCircle);
+        System.out.println("Try-catch block finished");
+
+    }
+
+    private static int divide(int firstNumb, int secondNumb) {
+        return firstNumb / secondNumb;
+    }
+
+    private static int multiplication(int thirdNumb, int fourthNumb) {
+        return thirdNumb * fourthNumb;
+    }
+
+    public static int addition(int memory, int sixNumb) {
+        return memory + sixNumb;
+    }
+
+    private static int deduction(int seventhNumb, int eighthNumb) {
+        return seventhNumb - eighthNumb;
+    }
+}
