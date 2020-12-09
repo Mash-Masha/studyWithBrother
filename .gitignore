@@ -1,4 +1,5 @@
 .idea/
 target/
 debug.log
+/.idea/
 studyselenium.iml
