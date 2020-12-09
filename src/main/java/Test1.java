@@ -15,6 +15,9 @@ public class Test1 {
         driver.manage().window().maximize();
         driver.get("http://tut.by");
 
+
+
+        
         driver.findElement(By.xpath("//div[@class='b-auth-i']/a")).click();
         driver.findElement(By.xpath("//input[@type='text' and @name='login']")).sendKeys("seleniumtests@tut.by");
         driver.findElement(By.xpath("//div[@class='b-hold']/input[2]")).sendKeys("123456789zxcvbn");
