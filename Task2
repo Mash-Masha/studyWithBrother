@@ -1,0 +1,50 @@
+Task2
+Part2
+1.Xpath
+Start page:
+a.//input[@id='search_from_str']
+b.//div[@class='search-controls']/input[2]
+c.//label[@for='memory']
+d.//input[@value='Войти']
+e.//div[@class='b-auth-submit']/a
+Email page
+f.//b[@class='b-user']
+g.//a[@class='b-header__link b-header__link_exit']
+h.//a[contains(@class,'link_setup')]
+i.//div[@role='navigation'and @aria-label='Папки']
+j.//span[@class='b-folders__folder__name']/a[not(@href='/lite/sent')]
+New email page
+k.//input[@id='id1166527693093']
+l.//input[@id='id1166527693078']
+m.//input[@type='submit' and @name='search']
+n.//button[contains(@class,'b-compose__more')]
+o. //div[@class='b-buttons']/input[@type='submit']
+p.//input[@class='b-compose__file']/..//input
+q.//button[@name='nosend']/../../input[@type='submit']
+1.CSS
+Start page:
+a.[id='search_from_str']
+b.[name='search']
+c.span.b-remember>label
+d.[value='Войти']
+e.[class='b-auth-submit']>a
+Email page
+f.b.b-user
+g.a[class='b-header__link b-header__link_exit']
+h.a[class$='link_setup']
+i.div[ aria-label='Папки']
+j.span[class='b-folders__folder__name']>a:not([href='/lite/sent'])
+New email page
+k.#id1166527693093
+l.#id1166527693078
+m.[name='search']
+n.button[name='nosend']
+o.div[class='b-buttons']>input[type='submit']
+p..b-compose__file~input
+q.
+Xpath only
+r.//input[contains(@class, 'b-compose__cancel')]/preceding-sibling::input[@type='submit']
+s.//div[@class='b-buttons']/input[2]/following-sibling::input/preceding-sibling::input
+Sent page
+t.a[aria-label='4 FOURTH. 4 FOURTH'],a[aria-label='2 SECOND. 2 SECOND']
+u.
