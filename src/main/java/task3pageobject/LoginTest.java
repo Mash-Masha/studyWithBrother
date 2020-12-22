@@ -1,5 +1,7 @@
 package task3pageobject;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
@@ -14,6 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class LoginTest {
     static WebDriver driver;
 
+    @Before
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
+        driver=new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.get("https://www.tut.by/");
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -21,17 +31,12 @@ public class LoginTest {
             "seleniumtests2@tut.by, 123456789zxcvbn"})
 
     public void loginWithCorrectCredentials(String email, String password) {
-        System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
-        WebDriver driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.tut.by/");
 
         MainPage mainPage=new MainPage(driver);
         mainPage.clickLoginButton();
-        try{
-            Thread.sleep(3000);} /*explicit wait*/
-        catch(InterruptedException e){
+        try {
+            Thread.sleep(3000);
+        } /*explicit wait*/ catch (InterruptedException e) {
             e.printStackTrace();
         }
         mainPage.loginWithInvalidCreds(email, password);
@@ -39,7 +44,10 @@ public class LoginTest {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Selenium Test']")));
 
 
-
-        }
+    }
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 
 }

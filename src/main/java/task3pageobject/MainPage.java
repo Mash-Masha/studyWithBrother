@@ -6,30 +6,39 @@ import org.openqa.selenium.WebDriver;
 public class MainPage {
 
     private WebDriver driver;
+
     public MainPage(WebDriver driver) {
         this.driver=driver;
     }
 
-    private By logInButton= By.xpath("//div[@class='b-auth-i']//a[@class='enter']");
+    private By logInButton=By.xpath("//div[@class='b-auth-i']//a[@class='enter']");
     public By emailField=By.xpath("//div[@class='b-hold']//input[@type='text']");
     public By passwordField=By.xpath("//div[@class='b-hold']//input[@type='password']");
     public By signInButton=By.xpath("//div[@class='b-hold']//input[@type='submit']");
     public By heading=By.xpath("//div[text()='Вход']");
 
-    public By getLogInButton() { return logInButton; }
+    public By getLogInButton() {
+        return logInButton;
+    }
 
-    public By getEmailField() { return emailField; }
+    public By getEmailField() {
+        return emailField;
+    }
 
-    public By getPasswordField() { return passwordField; }
+    public By getPasswordField() {
+        return passwordField;
+    }
 
-    public By getSignInButton() { return signInButton; }
+    public By getSignInButton() {
+        return signInButton;
+    }
 
 
-
-    public MainPage clickLoginButton(){
+    public MainPage clickLoginButton() {
         driver.findElement(logInButton).click();
         return new MainPage(driver);
     }
+
     public MainPage typePassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
         return this;
@@ -44,7 +53,8 @@ public class MainPage {
         driver.findElement(signInButton).click();
         return new SignInPage(driver);
     }
-    public String getHeadingText(){
+
+    public String getHeadingText() {
         return driver.findElement(heading).getText();
 
     }

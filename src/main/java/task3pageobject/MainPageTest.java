@@ -1,22 +1,22 @@
+package task3pageobject;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import task3pageobject.MainPage;
-import task3pageobject.SignInPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class MainPageTest {
-     static WebDriver driver;
+    static WebDriver driver;
     public MainPage mainPage;
 
      @Before
      public void setUp(){
          System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
-         WebDriver driver=new ChromeDriver();
+         driver=new ChromeDriver();
          driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
          driver.manage().window().maximize();
          driver.get("https://www.tut.by/");

@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 public class AlertMainPage {
     private WebDriver driver;
-
-
-
     public AlertMainPage(WebDriver driver) {
-        this.driver=driver;
-    }
+       setDriver(driver); }
+
+    public WebDriver getDriver() { return driver; }
+
+    public void setDriver(WebDriver driver) { this.driver=driver; }
 
     private By button=By.xpath("//button[@onclick='myConfirmFunction()']");
     private By button2=By.xpath("//button[@onclick='myPromptFunction()']");

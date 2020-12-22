@@ -1,6 +1,8 @@
 package task3pageobject;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,26 +10,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class AlertTest {
-    WebDriver driver;
+    private WebDriver driver;
+    public AlertMainPage alertMainPage;
 
 
-    /*@Before
+    @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
-        WebDriver driver=new ChromeDriver();
+        driver=new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
     }
-*/
+
     @Test
     public void acceptConfirmBox() {
-        System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
-        WebDriver driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
-        AlertMainPage alertMainPage=new AlertMainPage(driver);
         alertMainPage.clickButton();
         try {
             Alert alert=driver.switchTo().alert();
@@ -40,17 +37,11 @@ public class AlertTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.quit();
     }
 
 
     @Test
     public void dismissConfirmBox() {
-        System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
-        WebDriver driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
         AlertMainPage alertMainPage=new AlertMainPage(driver);
         alertMainPage.clickButton();
         try {
@@ -64,17 +55,11 @@ public class AlertTest {
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
         }
-        driver.quit();
 
     }
 
     @Test
     public void alertBox() {
-        System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
-        WebDriver driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
         AlertMainPage alertMainPage=new AlertMainPage(driver);
         alertMainPage.clickButton2();
         try {
@@ -89,14 +74,13 @@ public class AlertTest {
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
         }
-        driver.quit();
+
     }
-}
 
 
-/*
+
     @After
     public void tearDown(){
         driver.quit();
     }
-}*/
+}
