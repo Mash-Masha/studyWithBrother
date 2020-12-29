@@ -37,7 +37,7 @@ public class MultiSelectTest2 {
 
         List<WebElement> tableRows=driver.findElements(By.xpath("//select[@id='multi-select']//option"));
         Actions multiSelect=new Actions(driver);
-        multiSelect.click(tableRows.get(0)).keyDown(Keys.CONTROL); /*ппочему-то не выделяет первую строку ,которую кликаю*/
+        multiSelect.keyDown(Keys.CONTROL).click(tableRows.get(0)); /*ппочему-то не выделяет первую строку ,которую кликаю*/
         multiSelect.click(tableRows.get(4));
         multiSelect.click(tableRows.get(1)).keyUp(Keys.CONTROL).build().perform();
         driver.findElement(By.xpath("//div[@class='panel-body']//button[text()='Get All Selected']")).click();

@@ -18,6 +18,7 @@ public class AlertTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
         driver=new ChromeDriver();
+        alertMainPage=new AlertMainPage(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
@@ -25,6 +26,7 @@ public class AlertTest {
 
     @Test
     public void acceptConfirmBox() {
+        alertMainPage=new AlertMainPage(driver);
         alertMainPage.clickButton();
         try {
             Alert alert=driver.switchTo().alert();
