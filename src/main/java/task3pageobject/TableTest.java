@@ -43,9 +43,6 @@ public class TableTest {
         List<EmployeeInfo> employeeInfoFromPage=tablePage.getEmployeeInfo(tablePage.getRows());
         Assert.assertEquals(allExpectedRows,tablePage.selectEmloyeeByAgeAndSalary(employeeInfoFromPage));
 
-
-
-
     }
 
     @After
