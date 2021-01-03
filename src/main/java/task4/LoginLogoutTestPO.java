@@ -24,18 +24,18 @@ public class LoginLogoutTestPO {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("http://tut.by");
-        File screenshot =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(screenshot,new File("C:\\screenshot\\screenshot2.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
     public void LoginLogoutTest(){
         MainPagePO mainPagePO=new MainPagePO(driver);
         mainPagePO.clickLoginButton();
+        File screenshot =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshot,new File("C:\\screenshot\\screenshot2.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Assert.assertEquals(mainPagePO.getHeading(),"Войти как пользователь");
         mainPagePO.loginWithInvalidCreds("seleniumtests@tut.by","123456789zxcvbn");
         Assert.assertEquals(mainPagePO.getHeading2(),"Selenium Test");
