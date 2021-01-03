@@ -1,17 +1,12 @@
 package task4;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class LoginLogoutTestPO {
@@ -30,12 +25,7 @@ public class LoginLogoutTestPO {
     public void LoginLogoutTest(){
         MainPagePO mainPagePO=new MainPagePO(driver);
         mainPagePO.clickLoginButton();
-        File screenshot =((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(screenshot,new File("C:\\screenshot\\screenshot2.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mainPagePO.takeScreen(driver,"C:\\screenschot\\screnschot2.png");
         Assert.assertEquals(mainPagePO.getHeading(),"Войти как пользователь");
         mainPagePO.loginWithInvalidCreds("seleniumtests@tut.by","123456789zxcvbn");
         Assert.assertEquals(mainPagePO.getHeading2(),"Selenium Test");

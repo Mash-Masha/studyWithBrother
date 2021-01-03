@@ -1,7 +1,13 @@
 package task4;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MainPagePO extends LoginPagePO {
     private WebDriver driver;
@@ -82,6 +88,17 @@ public class MainPagePO extends LoginPagePO {
         this.typePassword(pasword);
         this.clickSignUpButton();
         return new LoginPagePO(driver);
+    }
+    public static void takeScreen(WebDriver webdriver,String fileWithScreen){
+        TakesScreenshot takeScreen=((TakesScreenshot)webdriver);
+        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
+        File destFile=new File(fileWithScreen);
+        try {
+            FileUtils.copyFile(screenFile,destFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

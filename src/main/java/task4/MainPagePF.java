@@ -1,15 +1,22 @@
 package task4;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPagePF extends LoginPagePF{
+import java.io.File;
+import java.io.IOException;
+
+public class MainPagePF extends LoginPagePF {
     private WebDriver driver;
 
     public MainPagePF(WebDriver driver) {
         super(driver);
-        this.driver=driver;}
+        this.driver=driver;
+    }
 
     @FindBy(xpath="//a[@class='enter']")
     WebElement loginButton;
@@ -42,31 +49,43 @@ public class MainPagePF extends LoginPagePF{
         this.heading=heading;
     }
 
-    public WebElement getLoginButton() {return loginButton;}
+    public WebElement getLoginButton() {
+        return loginButton;
+    }
 
-    public WebElement getEmailField() {return emailField;}
+    public WebElement getEmailField() {
+        return emailField;
+    }
 
-    public WebElement getPasswordField() {return passwordField;}
+    public WebElement getPasswordField() {
+        return passwordField;
+    }
 
-    public WebElement getSignUpButton() {return signUpButton;}
+    public WebElement getSignUpButton() {
+        return signUpButton;
+    }
 
-    public String getHeading() {return heading.getText();}
+    public String getHeading() {
+        return heading.getText();
+    }
 
 
-
-    public MainPagePF clickLoginButton(){
+    public MainPagePF clickLoginButton() {
         loginButton.click();
         return new MainPagePF(driver);
     }
-    public MainPagePF typeLogin(String login){
+
+    public MainPagePF typeLogin(String login) {
         emailField.sendKeys(login);
         return this;
     }
-    public MainPagePF typePassword(String password){
+
+    public MainPagePF typePassword(String password) {
         passwordField.sendKeys(password);
         return this;
     }
-    public LoginPagePF clickSignUpButton(){
+
+    public LoginPagePF clickSignUpButton() {
         signUpButton.click();
         return new LoginPagePF(driver);
     }
@@ -75,7 +94,18 @@ public class MainPagePF extends LoginPagePF{
         this.typeLogin(login);
         this.typePassword(pasword);
         this.clickSignUpButton();
-        return  new LoginPagePF(driver);
+        return new LoginPagePF(driver);
     }
 
+    public static void takeScreen(WebDriver webdriver, String fileWithScreen) {
+        TakesScreenshot takeScreen=((TakesScreenshot) webdriver);
+        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
+        File destFile=new File(fileWithScreen);
+        try {
+            FileUtils.copyFile(screenFile, destFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
