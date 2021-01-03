@@ -30,7 +30,7 @@ public class TablePage  {
             int age=Integer.parseInt(employee.findElement(By.xpath("./td[4]")).getText());
             String startDate=employee.findElement(By.xpath(".//td[5]")).getText();
             String salary1=employee.findElement(By.xpath(".//td[6]")).getText();
-            salary1=salary1.substring(1, salary1.length() - 2).replaceAll(",", " ");
+            salary1=salary1.substring(1, salary1.length() - 2).replaceAll(",", "");
             int salary=Integer.parseInt(salary1);
             employeeInfo.add(new EmployeeInfo(name, possition, office, age, salary, startDate));
         }

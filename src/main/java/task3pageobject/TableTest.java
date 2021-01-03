@@ -37,9 +37,9 @@ public class TableTest {
         System.out.println("Rows number is " + tablePage.getRows().size());
         Assert.assertEquals(10,tablePage.getRows().size());
         List<Employee> allExpectedRows=new ArrayList<Employee>();
-        allExpectedRows.add(new Employee("Cox","Junior Technical Author","San Francisco"));
-        allExpectedRows.add(new Employee("Greer","Software Engineer","London"));
-        allExpectedRows.add(new Employee("Williamson","Integration Specialist","New York"));
+        allExpectedRows.add(new Employee("A. Cox","Junior Technical Author","San Francisco"));
+        allExpectedRows.add(new Employee("B. Greer","Software Engineer","London"));
+        allExpectedRows.add(new Employee("B. Williamson","Integration Specialist","New York"));
         List<EmployeeInfo> employeeInfoFromPage=tablePage.getEmployeeInfo(tablePage.getRows());
         Assert.assertEquals(allExpectedRows,tablePage.selectEmloyeeByAgeAndSalary(employeeInfoFromPage));
 

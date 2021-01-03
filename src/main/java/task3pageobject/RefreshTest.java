@@ -28,7 +28,7 @@ public class RefreshTest {
     public void refreshPage(){
         driver.findElement(By.xpath("//button[@id='cricle-btn']")).click();
         Actions actions=new Actions(driver);
-        if(driver.findElement(By.xpath("//div[text()='50%']")).isDisplayed())
+        if(driver.findElement(By.xpath("//div[text()=='50%']")).isDisplayed())
             actions.sendKeys(Keys.F5).build().perform();
     }
 
