@@ -1,73 +1,34 @@
 package task4;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.io.File;
-import java.io.IOException;
-
-public class MainPagePF extends LoginPagePF {
+public class MainPagePF{
     private WebDriver driver;
 
     public MainPagePF(WebDriver driver) {
-        super(driver);
         this.driver=driver;
     }
 
     @FindBy(xpath="//a[@class='enter']")
     WebElement loginButton;
-    @FindBy(xpath="//input[@name='login']")
-    WebElement emailField;
-    @FindBy(xpath="//input[@name='password']")
-    WebElement passwordField;
-    @FindBy(xpath="//input[@value='Войти']")
-    WebElement signUpButton;
-    @FindBy(xpath="//p[@class='auth-soc-h']")
-    WebElement heading;
+    @FindBy(xpath="//span[@class='uname']")
+    WebElement userLink;
+    @FindBy(xpath="//a[text()='Выйти']")
+    WebElement logoutButton;
+    @FindBy(xpath="//a[text()='Войти']")
+    WebElement headingLogOut;
 
-    public void setLoginButton(WebElement loginButton) {
-        this.loginButton=loginButton;
-    }
+    public String getHeadingLogout() {return headingLogOut.getText();}
 
-    public void setEmailField(WebElement emailField) {
-        this.emailField=emailField;
-    }
+    public WebElement getLoginButton() {return loginButton;}
 
-    public void setPasswordField(WebElement passwordField) {
-        this.passwordField=passwordField;
-    }
+    public WebElement getUserLink() {return userLink;}
 
-    public void setSignUpButton(WebElement signUpButton) {
-        this.signUpButton=signUpButton;
-    }
+    public WebElement getLogoutButton() {return logoutButton;}
 
-    public void setHeading(WebElement heading) {
-        this.heading=heading;
-    }
-
-    public WebElement getLoginButton() {
-        return loginButton;
-    }
-
-    public WebElement getEmailField() {
-        return emailField;
-    }
-
-    public WebElement getPasswordField() {
-        return passwordField;
-    }
-
-    public WebElement getSignUpButton() {
-        return signUpButton;
-    }
-
-    public String getHeading() {
-        return heading.getText();
-    }
+    public WebElement getHeadingLogOut() {return headingLogOut;}
 
 
     public MainPagePF clickLoginButton() {
@@ -75,37 +36,24 @@ public class MainPagePF extends LoginPagePF {
         return new MainPagePF(driver);
     }
 
-    public MainPagePF typeLogin(String login) {
-        emailField.sendKeys(login);
-        return this;
+    public MainPagePF goLoginPage(){
+        this.clickLoginButton();
+        return new MainPagePF(driver);
     }
 
-    public MainPagePF typePassword(String password) {
-        passwordField.sendKeys(password);
-        return this;
-    }
-
-    public LoginPagePF clickSignUpButton() {
-        signUpButton.click();
+    public LoginPagePF clickUserLink() {
+        userLink.click();
         return new LoginPagePF(driver);
     }
 
-    public LoginPagePF loginWithInvalidCreds(String login, String pasword) {
-        this.typeLogin(login);
-        this.typePassword(pasword);
-        this.clickSignUpButton();
+    public LoginPagePF clickLogoutButton() {
+        if (!logoutButton.isSelected())
+            logoutButton.click();
         return new LoginPagePF(driver);
     }
-
-    public static void takeScreen(WebDriver webdriver, String fileWithScreen) {
-        TakesScreenshot takeScreen=((TakesScreenshot) webdriver);
-        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
-        File destFile=new File(fileWithScreen);
-        try {
-            FileUtils.copyFile(screenFile, destFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public LoginPagePF logOut() {
+        this.clickUserLink();
+        this.clickLogoutButton();
+        return new LoginPagePF(driver);
     }
 }

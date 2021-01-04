@@ -1,9 +1,8 @@
 package task3pageobject;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,13 +10,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class MultiSelectTest {
-    private  WebDriver driver;
+    private WebDriver driver;
 
 
-
-    @Before
-    public void setUp(){
+    @BeforeEach
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
         driver=new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -26,25 +26,25 @@ public class MultiSelectTest {
     }
 
 
-
     @Test
-    public  void isSelectedRows() {
-        WebElement isSelect= driver.findElement(By.xpath("//option[text()='California']"));
-        if(!isSelect.isSelected())
-                isSelect.click();
-        Assert.assertTrue(isSelect.isSelected());
-        WebElement isSelect2= driver.findElement(By.xpath("//option[text()='Florida']"));
-        if(!isSelect2.isSelected())
-            isSelect2.click();
-        Assert.assertTrue(isSelect2.isSelected());
-        WebElement isSelect3= driver.findElement(By.xpath("//option[text()='Florida']"));
-        if(!isSelect3.isSelected())
-            isSelect3.click();
-        Assert.assertTrue(isSelect3.isSelected());
+    public void isSelectedRows() {
+        WebElement isSelectCalifornia=driver.findElement(By.xpath("//option[text()='California']"));
+        if (!isSelectCalifornia.isSelected())
+            isSelectCalifornia.click();
+        assertTrue(isSelectCalifornia.isSelected());
+        WebElement isSelectFlorida=driver.findElement(By.xpath("//option[text()='Florida']"));
+        if (!isSelectFlorida.isSelected())
+            isSelectFlorida.click();
+        assertTrue(isSelectFlorida.isSelected());
+        WebElement isSelectTexas=driver.findElement(By.xpath("//option[text()='Texas']"));
+        if (!isSelectTexas.isSelected())
+            isSelectTexas.click();
+        assertTrue(isSelectTexas.isSelected());
 
     }
 
-    @After
+
+    @AfterEach
     public void tearDown(){
         driver.quit();
     }

@@ -1,7 +1,7 @@
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class LoginLogoutTest {
     private WebDriver driver;
 
-    @Before
+    @BeforeEach
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
         driver=new ChromeDriver();
@@ -30,7 +32,7 @@ public class LoginLogoutTest {
         WebElement button=driver.findElement(By.xpath("//div[@class='b-hold']//input[@value='Войти']"));
         button.submit();
         WebElement icon=driver.findElement(By.xpath("//span[@class='uname']"));
-        Assert.assertTrue(icon.getText().equals("Selenium Test"));
+        assertTrue(icon.getText().equals("Selenium Test"));
     }
 
     @Test
@@ -44,18 +46,17 @@ public class LoginLogoutTest {
         WebElement css=driver.findElement(By.cssSelector("div.ip-holder input#search_from_str"));
         WebElement xpath=driver.findElement(By.xpath("//input[@id='search_from_str']"));
 
-
-        Assert.assertTrue(link.isDisplayed());
-        Assert.assertTrue(link2.isDisplayed());
-        Assert.assertTrue(link3.isDisplayed());
-        Assert.assertTrue(link4.isDisplayed());
-        Assert.assertTrue(link5.isDisplayed());
-        Assert.assertTrue(input.size() > 0);
-        Assert.assertTrue(css.isDisplayed());
-        Assert.assertTrue(xpath.isDisplayed());
+        assertTrue(link.isDisplayed());
+        assertTrue(link2.isDisplayed());
+        assertTrue(link3.isDisplayed());
+        assertTrue(link4.isDisplayed());
+        assertTrue(link5.isDisplayed());
+        assertTrue(input.size() > 0);
+        assertTrue(css.isDisplayed());
+        assertTrue(xpath.isDisplayed());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         driver.quit();
     }

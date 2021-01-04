@@ -1,9 +1,8 @@
 package task3pageobject;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,11 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class TableTest {
     public WebDriver driver;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
         driver=new ChromeDriver();
@@ -31,21 +33,21 @@ public class TableTest {
         WebElement select=driver.findElement(By.xpath("//select//option[@value='10']"));
         if (!select.isSelected())
             select.click();
-        Assert.assertTrue(select.isSelected());
+        assertTrue(select.isSelected());
         driver.findElement(By.xpath("//table[@id='example']"));
         TablePage tablePage=new TablePage(driver);
         System.out.println("Rows number is " + tablePage.getRows().size());
-        Assert.assertEquals(10,tablePage.getRows().size());
+        assertEquals(10, tablePage.getRows().size());
         List<Employee> allExpectedRows=new ArrayList<Employee>();
-        allExpectedRows.add(new Employee("A. Cox","Junior Technical Author","San Francisco"));
-        allExpectedRows.add(new Employee("B. Greer","Software Engineer","London"));
-        allExpectedRows.add(new Employee("B. Williamson","Integration Specialist","New York"));
+        allExpectedRows.add(new Employee("A. Cox", "Junior Technical Author", "San Francisco"));
+        allExpectedRows.add(new Employee("B. Greer", "Software Engineer", "London"));
+        allExpectedRows.add(new Employee("B. Williamson", "Integration Specialist", "New York"));
         List<EmployeeInfo> employeeInfoFromPage=tablePage.getEmployeeInfo(tablePage.getRows());
-        Assert.assertEquals(allExpectedRows,tablePage.selectEmloyeeByAgeAndSalary(employeeInfoFromPage));
+        assertEquals(allExpectedRows, tablePage.selectEmloyeeByAgeAndSalary(employeeInfoFromPage));
 
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         driver.quit();
     }

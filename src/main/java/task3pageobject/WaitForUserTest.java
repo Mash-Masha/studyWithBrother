@@ -1,8 +1,8 @@
 package task3pageobject;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +15,7 @@ public class WaitForUserTest {
 
     private WebDriver driver;
 
-    @Before
+    @BeforeEach
     public void setUp(){
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
         driver=new ChromeDriver();
@@ -33,7 +33,7 @@ public class WaitForUserTest {
 
     }
 
-    @After
+    @AfterEach
     public void tearDown(){
         driver.quit();
     }

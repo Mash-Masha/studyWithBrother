@@ -1,20 +1,21 @@
 package task3pageobject;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class AlertTest {
     private WebDriver driver;
     public AlertMainPage alertMainPage;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
         driver=new ChromeDriver();
@@ -33,7 +34,7 @@ public class AlertTest {
             Thread.sleep(3000);
             alert.accept();
             WebElement message=driver.findElement(By.xpath("//p[@id='confirm-demo']"));
-            Assert.assertTrue(message.getText().equals("You pressed OK!"));
+            assertTrue(message.getText().equals("You pressed OK!"));
         } catch (NoAlertPresentException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -51,7 +52,7 @@ public class AlertTest {
             Thread.sleep(3000);
             alert.dismiss();
             WebElement message=driver.findElement(By.xpath("//p[@id='confirm-demo']"));
-            Assert.assertTrue(message.getText().equals("You pressed Cancel!"));
+            assertTrue(message.getText().equals("You pressed Cancel!"));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (NoAlertPresentException e) {
@@ -70,7 +71,7 @@ public class AlertTest {
             Thread.sleep(3000);
             alert.accept();
             WebElement message=driver.findElement(By.xpath("//p[@id='prompt-demo']"));
-            Assert.assertTrue(message.getText().equals("You have entered 'Mary' !"));
+            assertTrue(message.getText().equals("You have entered 'Mary' !"));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (NoAlertPresentException e) {
@@ -81,7 +82,7 @@ public class AlertTest {
 
 
 
-    @After
+    @AfterEach
     public void tearDown(){
         driver.quit();
     }

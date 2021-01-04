@@ -1,7 +1,7 @@
 package task3pageobject;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class LoginTest {
     static WebDriver driver;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\javalessons\\driver\\chromedriver.exe");
         driver=new ChromeDriver();
@@ -45,7 +45,7 @@ public class LoginTest {
 
 
     }
-    @After
+    @AfterEach
     public void tearDown(){
         driver.quit();
     }

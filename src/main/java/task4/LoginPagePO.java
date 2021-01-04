@@ -1,42 +1,68 @@
 package task4;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+
+import java.io.File;
+import java.io.IOException;
 
 public class LoginPagePO {
     private WebDriver driver;
-
 
     public LoginPagePO(WebDriver driver) {
         this.driver=driver;
     }
 
-    private By heading2=By.xpath("//span[text()='Selenium Test']");
-    private By link=By.xpath("//span[@class='uname']");
-    private By heading3=By.xpath("//a[text()='Войти']");
+
+    private By emailField=By.xpath("//input[@name='login']");
+    private By passwordField=By.xpath("//input[@name='password']");
+    private By signUpButton=By.xpath("//input[@value='Войти']");
+    private By headingLoginPage=By.xpath("//p[@class='auth-soc-h']");
+    private By headingLogin=By.xpath("//span[text()='Selenium Test']");
 
 
-    public String getHeading2() {return driver.findElement(heading2).getText();}
+    public String getHeadingLoginPage() {
+        return driver.findElement(headingLoginPage).getText();
+    }
 
-    public void setHeading2(By heading2) {this.heading2=heading2;}
-    public String getHeading3(){return driver.findElement(heading3).getText();}
-
-    public LoginPagePO clickLink() {
-        driver.findElement(link).click();
-        return new LoginPagePO(driver);
+    public String getHeadingLogin() {
+        return driver.findElement(headingLogin).getText();
     }
 
 
-    public LoginPagePO clickLogoutButton() {
-        WebElement logoutButton=driver.findElement(By.xpath("//a[text()='Выйти']"));
-        if(!logoutButton.isSelected())
-            logoutButton.click();
+    public LoginPagePO typeLogin(String login) {
+        driver.findElement(emailField).sendKeys(login);
+        return this;
+    }
+
+    public LoginPagePO typePassword(String password) {
+        driver.findElement(passwordField).sendKeys(password);
+        return this;
+    }
+
+    public LoginPagePO clickSignUpButton() {
+        driver.findElement(signUpButton).click();
         return new LoginPagePO(driver);
     }
-    public LoginPagePO logOut(){
-        this.clickLink();
-        this.clickLogoutButton();
+
+    public LoginPagePO loginWithInvalidCreds(String login, String pasword) {
+        this.typeLogin(login);
+        this.typePassword(pasword);
+        this.clickSignUpButton();
         return new LoginPagePO(driver);
+    }
+
+    public static void takeScreen(WebDriver webdriver, String fileWithScreen) {
+        TakesScreenshot takeScreen=((TakesScreenshot) webdriver);
+        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
+        File destFile=new File(fileWithScreen);
+        try {
+            FileUtils.copyFile(screenFile, destFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
+

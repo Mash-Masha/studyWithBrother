@@ -1,8 +1,14 @@
 package task4;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.io.File;
+import java.io.IOException;
 
 public class LoginPagePF {
     private WebDriver driver;
@@ -11,63 +17,59 @@ public class LoginPagePF {
         this.driver=driver;
     }
 
+    @FindBy(xpath="//input[@name='login']")
+    WebElement emailField;
+    @FindBy(xpath="//input[@name='password']")
+    WebElement passwordField;
+    @FindBy(xpath="//input[@value='Войти']")
+    WebElement signUpButton;
     @FindBy(xpath="//span[text()='Selenium Test']")
-    WebElement heading2;
-    @FindBy(xpath="//span[@class='uname']")
-    WebElement link;
-    @FindBy(xpath="//a[text()='Войти']")
-    WebElement heading3;
-    @FindBy(xpath="//a[text()='Выйти']")
-    WebElement logoutButton;
+    WebElement headingLoginPage;
 
-    public String getHeading2() {
-        return heading2.getText();
+    public String getHeadingLoginPage() {
+        return headingLoginPage.getText();
     }
 
-    public String getHeading3() {
-        return heading3.getText();
+    public WebElement getEmailField() {return emailField;}
+
+    public WebElement getPasswordField() {return passwordField;}
+
+    public WebElement getSignUpButton() {return signUpButton;}
+
+
+    public LoginPagePF typeLogin(String login) {
+        emailField.sendKeys(login);
+        return this;
     }
 
-    public void setHeading2(WebElement heading2) {
-        this.heading2=heading2;
+    public LoginPagePF typePassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
     }
 
-    public WebElement getLink() {
-        return link;
-    }
-
-    public void setLink(WebElement link) {
-        this.link=link;
-    }
-
-    public void setHeading3(WebElement heading3) {
-        this.heading3=heading3;
-    }
-
-    public WebElement getLogoutButton() {
-        return logoutButton;
-    }
-
-    public void setLogoutButton(WebElement logoutButton) {
-        this.logoutButton=logoutButton;
-    }
-
-    public LoginPagePF clickLink() {
-        link.click();
+    public LoginPagePF clickSignUpButton() {
+        signUpButton.click();
         return new LoginPagePF(driver);
     }
 
-
-    public LoginPagePF clickLogoutButton() {
-        if (!logoutButton.isSelected())
-            logoutButton.click();
+    public LoginPagePF loginWithInvalidCreds(String login, String password) {
+        this.typeLogin(login);
+        this.typePassword(password);
+        this.clickSignUpButton();
         return new LoginPagePF(driver);
     }
 
-    public LoginPagePF logOut() {
-        this.clickLink();
-        this.clickLogoutButton();
-        return new LoginPagePF(driver);
+    public static void takeScreen(WebDriver webdriver, String fileWithScreen) {
+        TakesScreenshot takeScreen=((TakesScreenshot) webdriver);
+        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
+        File destFile=new File(fileWithScreen);
+        try {
+            FileUtils.copyFile(screenFile, destFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }
