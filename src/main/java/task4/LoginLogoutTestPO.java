@@ -29,12 +29,12 @@ public class LoginLogoutTestPO {
         mainPagePO=new MainPagePO(driver);
         mainPagePO.goLoginPage();
         LoginPagePO loginPagePO=new LoginPagePO(driver);
-        loginPagePO.takeScreen(driver, "C:\\screenschot\\screen1.png");
+        loginPagePO.takeScreen(driver, "./screenschot/screenPO.png");
         assertEquals(loginPagePO.getHeadingLoginPage(), "Войти как пользователь");
-        loginPagePO.loginWithInvalidCreds("seleniumtests@tut.by", "123456789zxcvbn");
+        loginPagePO.loginWithInvalidCreds();
         assertEquals(loginPagePO.getHeadingLogin(), "Selenium Test");
         mainPagePO.logOut();
-        assertEquals(mainPagePO.getHeadingLogout(), "Войти");
+        assertEquals(mainPagePO.getHeadingLogout(),"Войти");
     }
 
     @AfterEach

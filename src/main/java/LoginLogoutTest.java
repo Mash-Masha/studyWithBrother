@@ -17,7 +17,7 @@ public class LoginLogoutTest {
 
     @BeforeEach
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "./src/java/resources/driver/chromedriver.exe");
         driver=new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -28,8 +28,8 @@ public class LoginLogoutTest {
     public void loginTest() {
         driver.findElement(By.xpath("//div[@class='b-auth-i']/a")).click();
         driver.findElement(By.xpath("//input[@type='text' and @name='login']")).sendKeys("seleniumtests@tut.by");
-        driver.findElement(By.xpath("//div[@class='b-hold']/input[2]")).sendKeys("123456789zxcvbn");
-        WebElement button=driver.findElement(By.xpath("//div[@class='b-hold']//input[@value='Войти']"));
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("123456789zxcvbn");
+        WebElement button=driver.findElement(By.xpath("//div[@class='b-hold']/input[@type='submit']"));
         button.submit();
         WebElement icon=driver.findElement(By.xpath("//span[@class='uname']"));
         assertTrue(icon.getText().equals("Selenium Test"));

@@ -16,9 +16,9 @@ public class LoginPagePO {
 
     private By emailField=By.xpath("//input[@name='login']");
     private By passwordField=By.xpath("//input[@name='password']");
-    private By signUpButton=By.xpath("//input[@value='Войти']");
+    private By signUpButton=By.xpath("//input[@class='button m-green auth__enter']");
     private By headingLoginPage=By.xpath("//p[@class='auth-soc-h']");
-    private By headingLogin=By.xpath("//span[text()='Selenium Test']");
+    private By headingLogin=By.xpath("//span[@class='uname']");
 
 
     public String getHeadingLoginPage() {
@@ -30,13 +30,13 @@ public class LoginPagePO {
     }
 
 
-    public LoginPagePO typeLogin(String login) {
-        driver.findElement(emailField).sendKeys(login);
+    public LoginPagePO typeLogin() {
+        driver.findElement(emailField).sendKeys("seleniumtests@tut.by");
         return this;
     }
 
-    public LoginPagePO typePassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+    public LoginPagePO typePassword() {
+        driver.findElement(passwordField).sendKeys("123456789zxcvbn");
         return this;
     }
 
@@ -45,10 +45,10 @@ public class LoginPagePO {
         return new LoginPagePO(driver);
     }
 
-    public LoginPagePO loginWithInvalidCreds(String login, String pasword) {
-        this.typeLogin(login);
-        this.typePassword(pasword);
-        this.clickSignUpButton();
+    public LoginPagePO loginWithInvalidCreds() {
+        typeLogin();
+        typePassword();
+        clickSignUpButton();
         return new LoginPagePO(driver);
     }
 

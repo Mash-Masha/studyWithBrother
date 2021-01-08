@@ -18,9 +18,9 @@ public class MainPagePF{
     @FindBy(xpath="//a[text()='Выйти']")
     WebElement logoutButton;
     @FindBy(xpath="//a[text()='Войти']")
-    WebElement headingLogOut;
+    WebElement headingLogin;
 
-    public String getHeadingLogout() {return headingLogOut.getText();}
+    public String getHeadingLogin() {return headingLogin.getText();}
 
     public WebElement getLoginButton() {return loginButton;}
 
@@ -28,7 +28,6 @@ public class MainPagePF{
 
     public WebElement getLogoutButton() {return logoutButton;}
 
-    public WebElement getHeadingLogOut() {return headingLogOut;}
 
 
     public MainPagePF clickLoginButton() {
@@ -47,13 +46,13 @@ public class MainPagePF{
     }
 
     public LoginPagePF clickLogoutButton() {
-        if (!logoutButton.isSelected())
             logoutButton.click();
         return new LoginPagePF(driver);
     }
+
     public LoginPagePF logOut() {
-        this.clickUserLink();
-        this.clickLogoutButton();
+       clickUserLink();
+       clickLogoutButton();
         return new LoginPagePF(driver);
     }
 }

@@ -2,7 +2,6 @@ package task4;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class MainPagePO {
     private WebDriver driver;
@@ -12,14 +11,8 @@ public class MainPagePO {
     }
 
     private By loginButton=By.xpath("//a[@class='enter']");
-    private By headingLogout=By.xpath("//a[text()='Войти']");
     private By userLink=By.xpath("//span[@class='uname']");
-
-    public By getLoginButton() {return loginButton;}
-
-    public By getUserLink() {return userLink;}
-
-    public String getHeadingLogout() {return driver.findElement(headingLogout).getText();}
+    private By logoutButton=By.xpath("//a[@class='button wide auth__reg']");
 
 
     public MainPagePO clickLoginButton() {
@@ -38,16 +31,15 @@ public class MainPagePO {
     }
 
     public MainPagePO clickLogoutButton() {
-        WebElement logoutButton=driver.findElement(By.xpath("//a[text()='Выйти']"));
-        if (!logoutButton.isSelected()) {
-            logoutButton.click();
-        }
+        if(!driver.findElement(logoutButton).isSelected())
+            driver.findElement(logoutButton).click();
         return new MainPagePO(driver);
     }
+    public String getHeadingLogout() {return driver.findElement(loginButton).getText();}
 
     public MainPagePO logOut() {
-        this.clickUserLink();
-        this.clickLogoutButton();
+        clickUserLink();
+        clickLogoutButton();
         return new MainPagePO(driver);
     }
 
