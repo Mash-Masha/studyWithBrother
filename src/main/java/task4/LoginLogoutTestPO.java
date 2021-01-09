@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoginLogoutTestPO {
     public WebDriver driver;
     public MainPagePO mainPagePO;
+    public BaseTest baseTest;
 
 
     @BeforeEach
@@ -29,12 +30,13 @@ public class LoginLogoutTestPO {
         mainPagePO=new MainPagePO(driver);
         mainPagePO.goLoginPage();
         LoginPagePO loginPagePO=new LoginPagePO(driver);
-        loginPagePO.takeScreen(driver, "./screenschot/screenPO.png");
+        baseTest=new BaseTest(driver);
+        baseTest.takeScreen(driver, "./screenschot/screenPO.png");
         assertEquals(loginPagePO.getHeadingLoginPage(), "Войти как пользователь");
         loginPagePO.loginWithInvalidCreds();
         assertEquals(loginPagePO.getHeadingLogin(), "Selenium Test");
         mainPagePO.logOut();
-        assertEquals(mainPagePO.getHeadingLogout(),"Войти");
+        assertEquals(mainPagePO.getHeadingLogout(), "Войти");
     }
 
     @AfterEach

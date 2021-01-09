@@ -1,10 +1,7 @@
 package task4;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-
-import java.io.File;
-import java.io.IOException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class LoginPagePO {
     private WebDriver driver;
@@ -52,17 +49,5 @@ public class LoginPagePO {
         return new LoginPagePO(driver);
     }
 
-    public static void takeScreen(WebDriver webdriver, String fileWithScreen) {
-        TakesScreenshot takeScreen=((TakesScreenshot) webdriver);
-        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
-        File destFile=new File(fileWithScreen);
-        try {
-            FileUtils.copyFile(screenFile, destFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 }
 

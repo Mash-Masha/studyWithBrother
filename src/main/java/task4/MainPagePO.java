@@ -31,11 +31,14 @@ public class MainPagePO {
     }
 
     public MainPagePO clickLogoutButton() {
-        if(!driver.findElement(logoutButton).isSelected())
-            driver.findElement(logoutButton).click();
+        driver.findElement(logoutButton).isSelected();
+        driver.findElement(logoutButton).click();
         return new MainPagePO(driver);
     }
-    public String getHeadingLogout() {return driver.findElement(loginButton).getText();}
+
+    public String getHeadingLogout() {
+        return driver.findElement(loginButton).getText();
+    }
 
     public MainPagePO logOut() {
         clickUserLink();

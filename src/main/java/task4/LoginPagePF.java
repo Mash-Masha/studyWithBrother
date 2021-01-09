@@ -19,15 +19,18 @@ public class LoginPagePF {
     WebElement signUpButton;
     @FindBy(xpath="//p[@class='auth-soc-h']")
     WebElement headingLoginPage;
-   @FindBy (xpath="//span[@class='uname']")
+    @FindBy(xpath="//span[@class='uname']")
     WebElement headingLogin;
 
 
+    public String getHeadingLogin() {
+        return headingLogin.getText();
+    }
 
-    public String getHeadingLogin(){return headingLogin.getText();}
 
-
-    public String getHeadingLoginPage() {return headingLoginPage.getText();}
+    public String getHeadingLoginPage() {
+        return headingLoginPage.getText();
+    }
 
 
     public LoginPagePF typeLogin(String login) {
@@ -41,13 +44,13 @@ public class LoginPagePF {
     }
 
     public LoginPagePF clickSignUpButton() {
-        if(!signUpButton.isSelected())
-            signUpButton.click();
+        signUpButton.isSelected();
+        signUpButton.click();
         return new LoginPagePF(driver);
     }
 
 
-    public LoginPagePF loginWithInvalidCreds(String login,String password) {
+    public LoginPagePF loginWithInvalidCreds(String login, String password) {
         this.typeLogin(login);
         this.typePassword(password);
         this.clickSignUpButton();
@@ -55,5 +58,4 @@ public class LoginPagePF {
     }
 
 
-
-    }
+}
