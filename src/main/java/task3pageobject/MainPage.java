@@ -2,6 +2,8 @@ package task3pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
 
@@ -15,22 +17,12 @@ public class MainPage {
     public By emailField=By.xpath("//div[@class='b-hold']//input[@type='text']");
     public By passwordField=By.xpath("//div[@class='b-hold']//input[@type='password']");
     public By signInButton=By.xpath("//div[@class='b-hold']//input[@type='submit']");
-    public By heading=By.xpath("//div[text()='Вход']");
+    public By heading=By.xpath("//div[@class='b-auth-title']");
+    public By expectedText=By.xpath("//span[@class='uname']");
 
-    public By getLogInButton() {
-        return logInButton;
-    }
 
-    public By getEmailField() {
-        return emailField;
-    }
-
-    public By getPasswordField() {
-        return passwordField;
-    }
-
-    public By getSignInButton() {
-        return signInButton;
+    public String getExpectedText() {
+        return driver.findElement(expectedText).getText();
     }
 
 
@@ -49,9 +41,9 @@ public class MainPage {
         return this;
     }
 
-    public SignInPage clickSignUpButton() {
+    public MainPage clickSignUpButton() {
         driver.findElement(signInButton).click();
-        return new SignInPage(driver);
+        return new MainPage(driver);
     }
 
     public String getHeadingText() {
@@ -59,22 +51,15 @@ public class MainPage {
 
     }
 
-    public SignInPage loginWithInvalidCreds(String login, String password) {
-        this.typeLogin(login);
-        this.typePassword(password);
-        this.clickSignUpButton();
-        return new SignInPage(driver);
+    public MainPage loginWithCreds(String login, String password) {
+        typeLogin(login);
+        typePassword(password);
+        clickSignUpButton();
+        return new MainPage(driver);
     }
 
+    public void explicitWait() {
+        WebDriverWait wait=(new WebDriverWait(driver, 10));
+        wait.until(ExpectedConditions.presenceOfElementLocated(expectedText));
+    }
 }
-
-
-
-
-
-
-
-
-
-
-

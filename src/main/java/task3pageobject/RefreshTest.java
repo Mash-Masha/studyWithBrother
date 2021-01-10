@@ -1,39 +1,24 @@
 package task3pageobject;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import task4.BaseTest;
 
-import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
-public class RefreshTest {
-    private WebDriver driver;
-
-    @BeforeEach
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
-        driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.seleniumeasy.com/test/bootstrap-download-progress-demo.html");
-    }
+public class RefreshTest extends BaseTest {
 
     @Test
-    public void refreshPage() {
+    public void refreshPageTest() {
+        driver.get("https://www.seleniumeasy.com/test/bootstrap-download-progress-demo.html");
         driver.findElement(By.xpath("//button[@id='cricle-btn']")).click();
-        Actions actions=new Actions(driver);
-        if (driver.findElement(By.xpath("//div[text()='50%']")).isDisplayed())
-            actions.sendKeys(Keys.F5).build().perform();
-    }
+        WebElement sizeText=driver.findElement(By.xpath("//div[text()='50%']"));
+        String count=sizeText.getText();
+        ExpectedConditions.textMatches(By.xpath("//div[text()='50%']"), Pattern.compile(count));
+        driver.navigate().refresh();
 
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
     }
 
 }

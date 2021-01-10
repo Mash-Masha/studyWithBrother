@@ -3,12 +3,13 @@ package task4;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPagePF {
     private WebDriver driver;
 
     public LoginPagePF(WebDriver driver) {
-        this.driver=driver;
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath="//input[@name='login']")

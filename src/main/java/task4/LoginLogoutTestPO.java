@@ -1,37 +1,19 @@
 package task4;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginLogoutTestPO {
-    public WebDriver driver;
-    public MainPagePO mainPagePO;
-    public BaseTest baseTest;
-
-
-    @BeforeEach
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
-        driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://tut.by");
-    }
+public class LoginLogoutTestPO extends BaseTest{
 
     @Test
     public void LoginLogoutTest() {
-        mainPagePO=new MainPagePO(driver);
+        driver.get("http://tut.by");
+        MainPagePO mainPagePO=new MainPagePO(driver);
         mainPagePO.goLoginPage();
         LoginPagePO loginPagePO=new LoginPagePO(driver);
-        baseTest=new BaseTest(driver);
-        baseTest.takeScreen(driver, "./screenschot/screenPO.png");
+        Utils utils=new Utils(driver);
+        utils.takeScreen(driver, "./screenschot/screenPO.png");
         assertEquals(loginPagePO.getHeadingLoginPage(), "Войти как пользователь");
         loginPagePO.loginWithInvalidCreds();
         assertEquals(loginPagePO.getHeadingLogin(), "Selenium Test");
@@ -39,9 +21,5 @@ public class LoginLogoutTestPO {
         assertEquals(mainPagePO.getHeadingLogout(), "Войти");
     }
 
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
 }

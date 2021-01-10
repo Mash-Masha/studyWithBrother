@@ -3,12 +3,13 @@ package task4;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class MainPagePF{
+public class MainPagePF {
     private WebDriver driver;
 
     public MainPagePF(WebDriver driver) {
-        this.driver=driver;
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath="//a[@class='enter']")
@@ -17,26 +18,9 @@ public class MainPagePF{
     WebElement userLink;
     @FindBy(xpath="//a[text()='Выйти']")
     WebElement logoutButton;
-    @FindBy(xpath="//a[text()='Войти']")
-    WebElement headingLogin;
 
-    public String getHeadingLogin() {return headingLogin.getText();}
-
-    public WebElement getLoginButton() {return loginButton;}
-
-    public WebElement getUserLink() {return userLink;}
-
-    public WebElement getLogoutButton() {return logoutButton;}
-
-
-
-    public MainPagePF clickLoginButton() {
+    public MainPagePF goLoginPage() {
         loginButton.click();
-        return new MainPagePF(driver);
-    }
-
-    public MainPagePF goLoginPage(){
-        this.clickLoginButton();
         return new MainPagePF(driver);
     }
 
@@ -46,13 +30,13 @@ public class MainPagePF{
     }
 
     public LoginPagePF clickLogoutButton() {
-            logoutButton.click();
+        logoutButton.click();
         return new LoginPagePF(driver);
     }
 
     public LoginPagePF logOut() {
-       clickUserLink();
-       clickLogoutButton();
+        clickUserLink();
+        clickLogoutButton();
         return new LoginPagePF(driver);
     }
 }

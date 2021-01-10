@@ -1,31 +1,26 @@
 package task4;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    private WebDriver driver;
+    public WebDriver driver;
 
-    public BaseTest(WebDriver driver) {
-        this.driver=driver;
+    @BeforeEach
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
+        driver=new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
     }
 
-    public static void takeScreen(WebDriver webdriver, String filePath) {
-        TakesScreenshot takeScreen=((TakesScreenshot) webdriver);
-        File screenFile=takeScreen.getScreenshotAs(OutputType.FILE);
-        File destFile=new File(filePath);
-        try {
-            FileUtils.copyFile(screenFile, destFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+    @AfterEach
+    public void tearDown() {
+        driver.quit();
     }
 }
-

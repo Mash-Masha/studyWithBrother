@@ -1,29 +1,13 @@
 package task3pageobject;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import task4.BaseTest;
 
-import java.util.concurrent.TimeUnit;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class LoginTest {
-    static WebDriver driver;
-
-    @BeforeEach
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
-        driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.tut.by/");
-    }
+public class LoginTest extends BaseTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -31,23 +15,17 @@ public class LoginTest {
             "seleniumtests2@tut.by, 123456789zxcvbn"})
 
     public void loginWithCorrectCredentials(String email, String password) {
-
+        driver.get("https://www.tut.by/");
         MainPage mainPage=new MainPage(driver);
         mainPage.clickLoginButton();
+        assertEquals(mainPage.getHeadingText(), "Вход");
         try {
             Thread.sleep(3000);
         } /*explicit wait*/ catch (InterruptedException e) {
             e.printStackTrace();
         }
-        mainPage.loginWithInvalidCreds(email, password);
-        WebDriverWait wait=(new WebDriverWait(driver, 10));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Selenium Test']")));
-
-
+        mainPage.loginWithCreds(email, password);
+        mainPage.explicitWait();
+        assertEquals(mainPage.getExpectedText(), "Selenium Test");
     }
-    @AfterEach
-    public void tearDown(){
-        driver.quit();
-    }
-
 }

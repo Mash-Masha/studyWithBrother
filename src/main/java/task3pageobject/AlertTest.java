@@ -1,89 +1,39 @@
 package task3pageobject;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+import task4.BaseTest;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-public class AlertTest {
-    private WebDriver driver;
+public class AlertTest extends BaseTest {
     public AlertMainPage alertMainPage;
+    public AlertPage alertPage;
 
-
-    @BeforeEach
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/driver/chromedriver.exe");
-        driver=new ChromeDriver();
-        alertMainPage=new AlertMainPage(driver);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
-    }
 
     @Test
     public void acceptConfirmBox() {
+        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
         alertMainPage=new AlertMainPage(driver);
-        alertMainPage.clickButton();
-        try {
-            Alert alert=driver.switchTo().alert();
-            Thread.sleep(3000);
-            alert.accept();
-            WebElement message=driver.findElement(By.xpath("//p[@id='confirm-demo']"));
-            assertTrue(message.getText().equals("You pressed OK!"));
-        } catch (NoAlertPresentException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        alertMainPage.clickButtonConfirm();
+        alertPage=new AlertPage(driver);
+        alertPage.alertAccept();
     }
-
 
     @Test
     public void dismissConfirmBox() {
-        AlertMainPage alertMainPage=new AlertMainPage(driver);
-        alertMainPage.clickButton();
-        try {
-            Alert alert=driver.switchTo().alert();
-            Thread.sleep(3000);
-            alert.dismiss();
-            WebElement message=driver.findElement(By.xpath("//p[@id='confirm-demo']"));
-            assertTrue(message.getText().equals("You pressed Cancel!"));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (NoAlertPresentException e) {
-            e.printStackTrace();
-        }
-
+        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
+        alertMainPage=new AlertMainPage(driver);
+        alertMainPage.clickButtonConfirm();
+        alertPage=new AlertPage(driver);
+        alertPage.alertDismiss();
     }
 
     @Test
     public void alertBox() {
-        AlertMainPage alertMainPage=new AlertMainPage(driver);
-        alertMainPage.clickButton2();
-        try {
-            Alert alert=driver.switchTo().alert();
-            alert.sendKeys("Mary");
-            Thread.sleep(3000);
-            alert.accept();
-            WebElement message=driver.findElement(By.xpath("//p[@id='prompt-demo']"));
-            assertTrue(message.getText().equals("You have entered 'Mary' !"));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (NoAlertPresentException e) {
-            e.printStackTrace();
-        }
+        driver.get("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
+        alertMainPage=new AlertMainPage(driver);
+        alertMainPage.clickButtonPromt();
+        alertPage=new AlertPage(driver);
+        alertPage.alertPromt();
 
     }
 
-
-
-    @AfterEach
-    public void tearDown(){
-        driver.quit();
-    }
 }

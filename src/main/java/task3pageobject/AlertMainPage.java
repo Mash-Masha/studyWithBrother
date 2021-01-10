@@ -12,16 +12,27 @@ public class AlertMainPage {
 
     private By confirmBoxButton=By.xpath("//button[@onclick='myConfirmFunction()']");
     private By promtBoxButton=By.xpath("//button[@onclick='myPromptFunction()']");
+    private By message=By.xpath("//p[@id='confirm-demo']");
+    private By messagePromt=By.xpath("//p[@id='prompt-demo']");
 
 
-    public AlertMainPage clickButton() {
+    public AlertMainPage clickButtonConfirm() {
         driver.findElement(confirmBoxButton).click();
         return new AlertMainPage(driver);
     }
 
-    public AlertMainPage clickButton2() {
+    public AlertMainPage clickButtonPromt() {
         driver.findElement(promtBoxButton).click();
         return new AlertMainPage(driver);
     }
+
+    public String getMessage() {
+        return driver.findElement(message).getText();
+    }
+
+    public String getMessagePromt() {
+        return driver.findElement(messagePromt).getText();
+    }
+
 }
 
