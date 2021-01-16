@@ -1,4 +1,4 @@
-package task4;
+package com.study.task4;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +12,8 @@ public class LoginLogoutTestPO extends BaseTest{
         MainPagePO mainPagePO=new MainPagePO(driver);
         mainPagePO.goLoginPage();
         LoginPagePO loginPagePO=new LoginPagePO(driver);
-        Utils utils=new Utils(driver);
-        utils.takeScreen(driver, "./screenschot/screenPO.png");
+        Utils utils=new Utils();
+        utils.takeScreen(driver);
         assertEquals(loginPagePO.getHeadingLoginPage(), "Войти как пользователь");
         loginPagePO.loginWithInvalidCreds();
         assertEquals(loginPagePO.getHeadingLogin(), "Selenium Test");

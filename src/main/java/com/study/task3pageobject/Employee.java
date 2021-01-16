@@ -1,4 +1,4 @@
-package task3pageobject;
+package com.study.task3pageobject;
 
 import java.util.Objects;
 

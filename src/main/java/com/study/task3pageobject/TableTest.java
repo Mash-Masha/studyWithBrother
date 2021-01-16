@@ -1,8 +1,8 @@
-package task3pageobject;
+package com.study.task3pageobject;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import task4.BaseTest;
+import com.study.task4.BaseTest;
 
 import java.util.ArrayList;
 import java.util.List;

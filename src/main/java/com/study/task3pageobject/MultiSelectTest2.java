@@ -1,4 +1,4 @@
-package task3pageobject;
+package com.study.task3pageobject;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

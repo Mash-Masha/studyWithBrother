@@ -1,4 +1,4 @@
-package task4;
+package com.study.task4;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +14,8 @@ public class LoginLogoutTestPF extends BaseTest {
         MainPagePF mainPagePF=new MainPagePF(driver);
         mainPagePF.goLoginPage();
         LoginPagePF loginPagePF=new LoginPagePF(driver);
-        utils=new Utils(driver);
-        utils.takeScreen(driver, "./screenschot/screenPF.png");
+        utils=new Utils();
+        utils.takeScreen(driver);
         assertEquals(loginPagePF.getHeadingLoginPage(), "Войти как пользователь");
         loginPagePF.loginWithInvalidCreds("seleniumtests@tut.by", "123456789zxcvbn");
         assertEquals(loginPagePF.getHeadingLogin(), "Selenium Test");

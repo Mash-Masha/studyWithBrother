@@ -1,4 +1,4 @@
-package task3pageobject;
+package com.study.task3pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -55,11 +55,9 @@ public class MainPage {
         typeLogin(login);
         typePassword(password);
         clickSignUpButton();
+        WebDriverWait wait=(new WebDriverWait(driver, 10));
+        wait.until(ExpectedConditions.presenceOfElementLocated(expectedText));
         return new MainPage(driver);
     }
 
-    public void explicitWait() {
-        WebDriverWait wait=(new WebDriverWait(driver, 10));
-        wait.until(ExpectedConditions.presenceOfElementLocated(expectedText));
-    }
 }

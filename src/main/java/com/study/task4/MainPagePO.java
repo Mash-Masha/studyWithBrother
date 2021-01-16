@@ -1,4 +1,4 @@
-package task4;
+package com.study.task4;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

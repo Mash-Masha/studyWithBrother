@@ -1,4 +1,4 @@
-package task4;
+package com.study.task4;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +9,7 @@ public class LoginPagePF {
     private WebDriver driver;
 
     public LoginPagePF(WebDriver driver) {
+        this.driver=driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -52,9 +53,9 @@ public class LoginPagePF {
 
 
     public LoginPagePF loginWithInvalidCreds(String login, String password) {
-        this.typeLogin(login);
-        this.typePassword(password);
-        this.clickSignUpButton();
+        typeLogin(login);
+        typePassword(password);
+        clickSignUpButton();
         return new LoginPagePF(driver);
     }
 

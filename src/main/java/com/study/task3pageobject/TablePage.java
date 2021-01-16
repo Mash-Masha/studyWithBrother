@@ -1,4 +1,4 @@
-package task3pageobject;
+package com.study.task3pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,8 +1,8 @@
-package task3pageobject;
+package com.study.task3pageobject;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import task4.BaseTest;
+import com.study.task4.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +25,6 @@ public class LoginTest extends BaseTest {
             e.printStackTrace();
         }
         mainPage.loginWithCreds(email, password);
-        mainPage.explicitWait();
         assertEquals(mainPage.getExpectedText(), "Selenium Test");
     }
 }
